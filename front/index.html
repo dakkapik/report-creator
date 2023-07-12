@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Report</title>
+</head>
+<body>
+  <h1>Create Report</h1>
+
+  <form action="/reports" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="intro">Introduction:</label>
+    <textarea id="intro" name="intro" required></textarea><br><br>
+
+    <label for="body">Body:</label>
+    <textarea id="body" name="body" required></textarea><br><br>
+
+    <label for="conclusion">Conclusion:</label>
+    <textarea id="conclusion" name="conclusion" required></textarea><br><br>
+
+    <input type="submit" value="Create Report">
+  </form>
+</body>
+</html>
