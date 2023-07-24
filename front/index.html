@@ -2,24 +2,81 @@
 <html>
 <head>
   <title>Create Report</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.min.js" 
+  integrity="sha512vDKWohFHe2vkVWXHp3tKvIxxXg0pJxeid5eo+UjdjME3DBFBn2F8yWOE0XmiFcFbXxrEOR1JriWEno5Ckpn15A==" 
+  crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Luxurious+Roman&family=Roboto+Slab:wght@100&display=swap" rel="stylesheet">
+  <style>
+    html, body{
+      font-family: 'Roboto Slab', serif;
+      /* font-family: 'Luxurious Roman'; */
+      /* font-family: 'Gideon Roman' */
+    }
+    body > div {
+      background-color: red;
+      /* display: flex; */
+    }
+    form > div {
+      display: flex;
+      background-color: greenyellow;
+    }
+
+    form > div> textarea{
+      width:30vw
+    }
+  </style>
 </head>
 <body>
-  <h1>Create Report</h1>
+  <div id="form-to-print">
+    <h1>Create Report</h1>
 
-  <form action="/reports" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br><br>
+    <form action="/reports" method="POST" 
+    <!-- id="form-to-print" -->
+    >
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <div>
+        <label for="intro">Introduction:</label>
+        <textarea id="intro" name="intro" required></textarea>
+      </div>
 
-    <label for="intro">Introduction:</label>
-    <textarea id="intro" name="intro" required></textarea><br><br>
-
-    <label for="body">Body:</label>
-    <textarea id="body" name="body" required></textarea><br><br>
-
-    <label for="conclusion">Conclusion:</label>
-    <textarea id="conclusion" name="conclusion" required></textarea><br><br>
-
-    <input type="submit" value="Create Report">
-  </form>
+      <div>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" required></textarea>
+      </div>
+      <h4>conclusion</h4>
+      <div>
+        <label for="conclusion"></label>
+        <textarea id="conclusion" name="conclusion" required></textarea>
+      </div>
+  
+      <input type="submit" value="Create Report">
+    </form>
+    <button id="pdf-button">create pdf</button>
+  </div>
+  
 </body>
+<script>       
+  const opt = {
+    margin:       1,
+    filename:     'myfile.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  const button = document.getElementById("pdf-button");
+  button.onclick = () => {GeneratePdf()}
+
+  // Function to GeneratePdf
+  function GeneratePdf() {
+      var element = document.getElementById('form-to-print');
+      html2pdf(element,opt);
+  }
+</script>
 </html>

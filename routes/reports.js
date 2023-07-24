@@ -3,7 +3,6 @@ const Report = require("../models/Report")
 
 // Retrieve all reports
 router.get('/', async (req, res) => {
-  console.log("REPORTS CALLED")
     try {
       const reports = await Report.find();
       res.json(reports);
@@ -15,8 +14,6 @@ router.get('/', async (req, res) => {
 
 // Create a new report
 router.post('/', async (req, res) => {
-
-    console.log(req.body)
     try {
       const { name, intro, body, conclusion } = req.body;
   
