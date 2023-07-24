@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 // Create a new report
 router.post('/', async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     try {
       const { author_names,
       affiliations,
