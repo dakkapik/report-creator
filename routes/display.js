@@ -2,7 +2,7 @@ const router = require("express").Router()
 const path = require("path")
 
 router.get("/", (req, res) => {
-    const filePath = path.join(__dirname, "../front/index.html")
+    const filePath = path.join(__dirname, "../front/report.html")
 
     res.sendFile(filePath,(err) => {
         if(err) {

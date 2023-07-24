@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const display = require("./routes/display");
 const reports = require("./routes/reports");
+const ip = require("./helper").getHostIp()
 
 
 require("./db")().then((db)=> {
@@ -23,5 +24,5 @@ app.use('/reports', reports);
 // Start the server
 const port = 3000;
 app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Server listening: http://${ip}:${port}`);
 });
