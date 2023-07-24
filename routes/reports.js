@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const Report = require("../models/Report")
+const path = require("path");
 
 // Retrieve all reports
 router.get('/', async (req, res) => {
@@ -37,21 +38,21 @@ router.post('/', async (req, res) => {
       });
       const report = await newReport.save();
   
-      res.redirect('/reports');
+      res.redirect(`../display/${report._id}`);
     } catch (err) {
       console.error('Error creating report:', err);
       res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-router.get("/display/:id", (req, res) => {
-  const filePath = path.join(__dirname, "../front/test2.html")
-
-  res.sendFile(filePath,(err) => {
-      if(err) {
-          console.log(err)
-      }
-  })
+router.get("/:id", async (req, res) => {
+  try {
+    const report = await Report.findById(req.params.id);
+    res.json(report);
+  } catch (err) {
+    console.error('Error retrieving reports:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 })
 
   

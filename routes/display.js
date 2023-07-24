@@ -21,14 +21,14 @@ router.get("/report", (req, res) => {
     })
 })
 
-// router.get("/display/:id", (req, res) => {
-//     const filePath = path.join(__dirname, "../front/test2.html")
+router.get("/display/:id", (req, res) => {
+    const filePath = path.join(__dirname, "../front/display.html")
 
-//     res.sendFile(filePath,(err) => {
-//         if(err) {
-//             console.log(err)
-//         }
-//     })
-// })
+    res.sendFile(filePath,(err) => {
+        if(err) {
+            console.log(err)
+        }
+    })
+})
 
 module.exports = router;
