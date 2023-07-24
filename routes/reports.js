@@ -14,16 +14,28 @@ router.get('/', async (req, res) => {
 
 // Create a new report
 router.post('/', async (req, res) => {
+    console.log(req.body)
     try {
-      const { name, intro, body, conclusion } = req.body;
+      const { author_names,
+      affiliations,
+      contact_information,
+      abstract_content,
+      introduction_content,
+      section1_content,
+      section2_content,
+      reference1 } = req.body;
   
       const newReport = new Report({
-        name,
-        intro,
-        body,
-        conclusion,
+        author_names,// this should be array with it's own verification
+        affiliations,
+        contact_information,
+        abstract_content,
+        introduction_content,
+        section1_content,
+        section2_content,
+        reference1 
       });
-      await newReport.save();
+      const report = await newReport.save();
   
       res.redirect('/reports');
     } catch (err) {
@@ -31,5 +43,16 @@ router.post('/', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+router.get("/display/:id", (req, res) => {
+  const filePath = path.join(__dirname, "../front/test2.html")
+
+  res.sendFile(filePath,(err) => {
+      if(err) {
+          console.log(err)
+      }
+  })
+})
+
   
 module.exports = router;
